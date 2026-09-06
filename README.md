@@ -14,13 +14,15 @@
 4. [Модель данных](docs/05-data-model.md) → [контракт API](api/openapi.json).
 5. [Приёмка и трассировка](docs/07-acceptance.md): от бизнес-цели до конкретной проверки.
 
+Отдельные диаграммы: [High-Level Architecture](diagrams/high-level-architecture.md) · [BPMN бизнес-процессы](diagrams/business-processes.md) · [UML Sequence Diagrams](diagrams/uml-sequence-diagrams.md).
+
 ## Артефакты
 
 | Область | Содержание |
 |---|---|
 | Постановка задачи и управление границами | Контекст, MVP, допущения, вопросы заказчику |
 | Формализация требований | FR/NFR, бизнес-правила, роли и права |
-| Моделирование процессов | AS-IS / TO-BE, редактируемая BPMN 2.0 |
+| Архитектура и процессы | High-Level Architecture, AS-IS / TO-BE, BPMN 2.0 |
 | Описание взаимодействия систем | UML sequence, REST API, ошибки и идемпотентность |
 | Проектирование данных | ER-диаграмма, словарь, PostgreSQL DDL |
 | Проверяемость требований | Критерии приёмки, негативные и граничные сценарии |
@@ -49,6 +51,7 @@ tools/      Проверка внутренних ссылок и структу
 ## Как изучать и проверять
 
 - Документы и Mermaid-диаграммы читаются прямо в GitHub.
+- `diagrams/high-level-architecture.md`, `diagrams/business-processes.md` и `diagrams/uml-sequence-diagrams.md` содержат диаграммы Mermaid и читаются прямо в GitHub.
 - `diagrams/booking.bpmn` можно открыть в редакторе BPMN 2.0. Это процесс оркестрации запроса, не исполняемая конфигурация движка.
 - `api/openapi.json` можно импортировать в Swagger Editor или Postman. Адрес `https://api.slotly.example/v1` — демонстрационный, сервер не развёрнут.
 - `database/schema.sql` описывает модель PostgreSQL; это проект DDL, а не миграция существующей системы.
