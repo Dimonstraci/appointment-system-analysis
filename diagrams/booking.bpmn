@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Slotly" targetNamespace="https://slotly.example/bpmn">
+  <bpmn:process id="BookingProcess" name="Обработка команды бронирования" isExecutable="false">
+    <bpmn:documentation>Проверка формирует результат или контекст для транзакции. При отказе в правах/валидации транзакция пропускается. Обработка включает идемпотентный повтор, конфликт и новое создание; подробности в UML и API.</bpmn:documentation>
+    <bpmn:laneSet id="Lanes"><bpmn:lane id="SystemLane" name="Система записи"><bpmn:flowNodeRef>Start</bpmn:flowNodeRef><bpmn:flowNodeRef>Validate</bpmn:flowNodeRef><bpmn:flowNodeRef>Process</bpmn:flowNodeRef><bpmn:flowNodeRef>Result</bpmn:flowNodeRef><bpmn:flowNodeRef>Success</bpmn:flowNodeRef><bpmn:flowNodeRef>Failure</bpmn:flowNodeRef><bpmn:flowNodeRef>EndOK</bpmn:flowNodeRef><bpmn:flowNodeRef>EndFail</bpmn:flowNodeRef></bpmn:lane></bpmn:laneSet>
+    <bpmn:startEvent id="Start" name="Команда получена"><bpmn:outgoing>F1</bpmn:outgoing></bpmn:startEvent>
+    <bpmn:serviceTask id="Validate" name="Проверить права, запрос и ключ"><bpmn:incoming>F1</bpmn:incoming><bpmn:outgoing>F2</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:serviceTask id="Process" name="Обработать бронирование в транзакции"><bpmn:incoming>F2</bpmn:incoming><bpmn:outgoing>F3</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Result" name="Успешный результат?" default="F5"><bpmn:incoming>F3</bpmn:incoming><bpmn:outgoing>F4</bpmn:outgoing><bpmn:outgoing>F5</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:sendTask id="Success" name="Вернуть 201 и запись"><bpmn:incoming>F4</bpmn:incoming><bpmn:outgoing>F6</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:sendTask id="Failure" name="Вернуть код отказа"><bpmn:incoming>F5</bpmn:incoming><bpmn:outgoing>F7</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:endEvent id="EndOK" name="Подтверждено"><bpmn:incoming>F6</bpmn:incoming></bpmn:endEvent>
+    <bpmn:endEvent id="EndFail" name="Отказ"><bpmn:incoming>F7</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="F1" sourceRef="Start" targetRef="Validate"/>
+    <bpmn:sequenceFlow id="F2" sourceRef="Validate" targetRef="Process"/>
+    <bpmn:sequenceFlow id="F3" sourceRef="Process" targetRef="Result"/>
+    <bpmn:sequenceFlow id="F4" sourceRef="Result" targetRef="Success" name="Да"/>
+    <bpmn:sequenceFlow id="F5" sourceRef="Result" targetRef="Failure" name="Нет"/>
+    <bpmn:sequenceFlow id="F6" sourceRef="Success" targetRef="EndOK"/>
+    <bpmn:sequenceFlow id="F7" sourceRef="Failure" targetRef="EndFail"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram"><bpmndi:BPMNPlane id="Plane" bpmnElement="BookingProcess">
+    <bpmndi:BPMNShape id="Lane_di" bpmnElement="SystemLane" isHorizontal="true"><dc:Bounds x="10" y="15" width="1030" height="320"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Start_di" bpmnElement="Start"><dc:Bounds x="60" y="132" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Validate_di" bpmnElement="Validate"><dc:Bounds x="145" y="110" width="160" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Process_di" bpmnElement="Process"><dc:Bounds x="355" y="110" width="170" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Result_di" bpmnElement="Result" isMarkerVisible="true"><dc:Bounds x="580" y="125" width="50" height="50"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Success_di" bpmnElement="Success"><dc:Bounds x="710" y="55" width="150" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="Failure_di" bpmnElement="Failure"><dc:Bounds x="710" y="215" width="150" height="80"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="EndOK_di" bpmnElement="EndOK"><dc:Bounds x="925" y="77" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="EndFail_di" bpmnElement="EndFail"><dc:Bounds x="925" y="237" width="36" height="36"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1"><di:waypoint x="96" y="150"/><di:waypoint x="145" y="150"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2"><di:waypoint x="305" y="150"/><di:waypoint x="355" y="150"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3"><di:waypoint x="525" y="150"/><di:waypoint x="580" y="150"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F4_di" bpmnElement="F4"><di:waypoint x="605" y="125"/><di:waypoint x="605" y="95"/><di:waypoint x="710" y="95"/><bpmndi:BPMNLabel><dc:Bounds x="650" y="75" width="35" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F5_di" bpmnElement="F5"><di:waypoint x="605" y="175"/><di:waypoint x="605" y="255"/><di:waypoint x="710" y="255"/><bpmndi:BPMNLabel><dc:Bounds x="650" y="235" width="35" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F6_di" bpmnElement="F6"><di:waypoint x="860" y="95"/><di:waypoint x="925" y="95"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F7_di" bpmnElement="F7"><di:waypoint x="860" y="255"/><di:waypoint x="925" y="255"/></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>
