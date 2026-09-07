@@ -6,6 +6,11 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.name==='.git'||e.name==='node_modules'?[]:e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 const files=walk(root);
+for(const required of [
+  'docs/00-case-study.md',
+  'docs/08-traceability-matrix.md',
+  'decisions/002-idempotency-result.md'
+]) assert.ok(fs.existsSync(path.join(root,required)),`Missing portfolio artifact ${required}`);
 let linkCount=0;
 for(const file of files.filter(f=>f.endsWith('.md'))){
   const content=fs.readFileSync(file,'utf8');
