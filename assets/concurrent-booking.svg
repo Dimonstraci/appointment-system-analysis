@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">Конкурентное бронирование</title><desc id="desc">Два клиента отправляют запись на один слот. Первый получает подтверждение, второй получает конфликт после повторной проверки в транзакции.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#18313b}.head{font-size:16px;font-weight:700}.small{font-size:12px;fill:#52656c}.event{font-size:13px}.line{stroke:#8ba1a5;stroke-width:1.5;stroke-dasharray:5 5}.msg{stroke:#007c78;stroke-width:2;fill:none}.ok{fill:#e1f1ed;stroke:#007c78;stroke-width:1.5}.bad{fill:#fff0eb;stroke:#e26c44;stroke-width:1.5}.chip{font-size:11px;font-weight:700}</style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#007c78"/></marker></defs>
+  <rect width="960" height="440" fill="#fbfcfb" rx="16"/><text x="48" y="48" class="head" font-size="22">Конкурентное бронирование одного слота</text><text x="48" y="70" class="small">Список свободных слотов — снимок; окончательное решение принимает транзакция</text>
+  <text x="108" y="112" class="head">Клиент A</text><text x="307" y="112" class="head">Booking API</text><text x="570" y="112" class="head">PostgreSQL</text><text x="777" y="112" class="head">Клиент B</text>
+  <path d="M145 128 V400 M365 128 V400 M625 128 V400 M820 128 V400" class="line"/>
+  <path d="M145 158 H355" class="msg" marker-end="url(#arrow)"/><text x="185" y="150" class="event">POST · key A</text>
+  <path d="M820 182 H375" class="msg" marker-end="url(#arrow)"/><text x="655" y="174" class="event">POST · key B</text>
+  <path d="M375 215 H615" class="msg" marker-end="url(#arrow)"/><text x="425" y="207" class="event">BEGIN + lock slot</text>
+  <rect x="654" y="198" width="180" height="38" rx="9" class="bad"/><text x="670" y="221" class="chip" fill="#b14a2a">B ждёт блокировку</text>
+  <path d="M615 257 H375" class="msg" marker-end="url(#arrow)"/><text x="410" y="249" class="event">INSERT + COMMIT</text>
+  <path d="M355 286 H155" class="msg" marker-end="url(#arrow)"/><rect x="166" y="265" width="96" height="30" rx="8" class="ok"/><text x="190" y="285" class="chip">201 CREATED</text>
+  <path d="M375 325 H615" class="msg" marker-end="url(#arrow)"/><text x="422" y="317" class="event">повторная проверка</text>
+  <path d="M615 354 H375" class="msg" marker-end="url(#arrow)"/><text x="430" y="346" class="event">slot unavailable</text>
+  <path d="M375 383 H810" class="msg" marker-end="url(#arrow)"/><rect x="676" y="362" width="118" height="30" rx="8" class="bad"/><text x="694" y="382" class="chip" fill="#b14a2a">409 CONFLICT</text>
+</svg>

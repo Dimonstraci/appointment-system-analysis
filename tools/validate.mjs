@@ -9,8 +9,17 @@ const files=walk(root);
 for(const required of [
   'docs/00-case-study.md',
   'docs/08-traceability-matrix.md',
-  'decisions/002-idempotency-result.md'
+  'decisions/002-idempotency-result.md',
+  'assets/system-context.svg',
+  'assets/concurrent-booking.svg',
+  'assets/data-model.svg',
+  '.github/workflows/validate.yml'
 ]) assert.ok(fs.existsSync(path.join(root,required)),`Missing portfolio artifact ${required}`);
+for(const asset of files.filter(file=>file.endsWith('.svg'))){
+  const svg=fs.readFileSync(asset,'utf8');
+  assert.match(svg,/<svg\b/);
+  assert.match(svg,/<title\b/);
+}
 let linkCount=0;
 for(const file of files.filter(f=>f.endsWith('.md'))){
   const content=fs.readFileSync(file,'utf8');

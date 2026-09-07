@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="350" viewBox="0 0 960 350" role="img" aria-labelledby="title desc">
+  <title id="title">Контекст системы Slotly</title><desc id="desc">Клиент и администратор работают с веб-интерфейсом, который обращается к Booking API, PostgreSQL и внешнему провайдеру идентификации.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#18313b}.label{font-size:16px;font-weight:700}.sub{font-size:12px;fill:#5f7177}.node{fill:#f4f7f6;stroke:#86a5a5;stroke-width:2}.core{fill:#e1f1ed;stroke:#007c78;stroke-width:3}.line{stroke:#007c78;stroke-width:2.5;fill:none}.tag{fill:#007c78}.tagtext{font-size:11px;fill:#fff;font-weight:700}</style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#007c78"/></marker></defs>
+  <rect width="960" height="350" fill="#fbfcfb" rx="16"/>
+  <text x="48" y="52" class="label" font-size="22">Slotly · контекст системы</text><text x="48" y="76" class="sub">Граница MVP: самостоятельная запись и управление существующими записями</text>
+  <rect x="65" y="145" width="160" height="82" rx="12" class="node"/><text x="115" y="178" class="label">Клиент</text><text x="89" y="201" class="sub">выбирает и отменяет</text>
+  <rect x="65" y="245" width="160" height="55" rx="12" class="node"/><text x="95" y="278" class="label">Администратор</text>
+  <rect x="360" y="125" width="220" height="125" rx="14" class="core"/><text x="424" y="165" class="label">Slotly</text><text x="400" y="190" class="sub">Web interface + Booking API</text><rect x="422" y="207" width="98" height="22" rx="11" class="tag"/><text x="439" y="222" class="tagtext">MVP boundary</text>
+  <rect x="710" y="115" width="175" height="68" rx="12" class="node"/><text x="750" y="146" class="label">PostgreSQL</text><text x="746" y="166" class="sub">слоты и записи</text>
+  <rect x="710" y="218" width="175" height="68" rx="12" class="node"/><text x="750" y="249" class="label">Внешний IdP</text><text x="742" y="269" class="sub">токен и роль</text>
+  <path d="M225 186 H350" class="line" marker-end="url(#arrow)"/><path d="M225 272 H315 V220 H350" class="line" marker-end="url(#arrow)"/><path d="M580 166 H700" class="line" marker-end="url(#arrow)"/><path d="M580 220 H700" class="line" marker-end="url(#arrow)"/>
+</svg>

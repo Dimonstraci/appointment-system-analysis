@@ -40,6 +40,22 @@ flowchart LR
     ID[Внешний сервис идентификации] --> A
 ```
 
+## Архитектура за один экран
+
+<p align="center">
+  <img src="assets/system-context.svg" alt="Контекст системы Slotly" width="100%" />
+</p>
+
+<p align="center">
+  <img src="assets/concurrent-booking.svg" alt="Последовательность конкурентного бронирования" width="100%" />
+</p>
+
+<p align="center">
+  <img src="assets/data-model.svg" alt="Ключевые связи модели данных" width="100%" />
+</p>
+
+Исходные редактируемые диаграммы и полная логика решения находятся в каталоге [diagrams](diagrams/) и документе [Процессы и UML](docs/04-processes-and-uml.md).
+
 ## Состав репозитория
 
 ```text
